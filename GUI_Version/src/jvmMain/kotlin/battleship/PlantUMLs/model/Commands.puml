@@ -1,0 +1,25 @@
+@startuml
+
+hide empty members
+
+abstract class Command {
+  argsSyntax: String
+  action(:Game, args: List<String>): Game?
+  show(game: Game)
+}
+
+class put << (o,cyan) >> extends Command
+
+class grid << (o,cyan) >> extends Command
+
+class help << (o,cyan) >> extends Command
+
+class start << (o,cyan) >> extends Command
+
+class shot << (o,cyan) >> extends Command
+
+class refresh << (o,cyan) >> extends Command
+
+class exit << (o,cyan) >> extends Command
+
+@enduml

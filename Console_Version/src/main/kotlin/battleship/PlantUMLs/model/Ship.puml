@@ -1,0 +1,9 @@
+@startuml
+
+
+enum HitStatus{
+{static} HIT
+{static} SUNK
+}
+
+@enduml

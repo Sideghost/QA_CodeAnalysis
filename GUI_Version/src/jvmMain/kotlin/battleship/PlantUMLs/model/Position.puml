@@ -1,0 +1,25 @@
+@startuml
+hide empty members
+
+class Position{
++row
++column
+{static} +values: List<Position>
++get()
+}
+
+class Row{
++number
++ordinal
+{static} +values: List<Row>
+}
+
+class Column{
++letter
++ordinal
+{static} +values: List<Column>
+}
+
+Row <-- Position
+Column <-- Position
+@enduml

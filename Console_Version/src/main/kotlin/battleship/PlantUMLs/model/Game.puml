@@ -1,0 +1,110 @@
+@startuml
+hide empty members
+
+class Position{
+
+{static} values: List<Position>
+}
+Position<--Cell
+class Row{
+number
+ordinal
+{static} values: List<Row>
+}
+
+class Column{
+letter
+ordinal
+{static} values: List<Column>
+}
+
+Row <-left- Position
+Column <-right- Position
+
+class ShipType{
+name: String
+squares: Int
+fleetQuantity: Int
+{static} values: List<ShipType>
+}
+
+class Board{
+fleet: Fleet = emptyList()
+grid: Grid = mapOf()
+}
+class Grid << (T,cyan) >> {
+mapOf(Pair<Position, Cell>)
+}
+
+Fleet << (T,cyan) >>
+Fleet<-left-Board
+Grid<--Board
+
+class Game{
+name: String
+boardA: Board
+boardB: Board
+state: GameState = SETUP
+player: Player = Player.A
+turn: Player = Player.A
+}
+Board<--Game
+
+class Ship{
+type: ShipType
+body: ShipBody
+}
+
+abstract class Cell{
+pos: Position
+}
+
+class MissCell{
+pos: Position
+}
+Cell <|-right- MissCell
+
+class ShipCell{
+pos: Position
+ship: Ship
+}
+
+class ShipHit{
+pos: Position
+ship: Ship
+}
+
+class ShipSunk{
+pos: Position
+ship: Ship
+}
+
+Cell <|-- ShipCell
+ShipCell <|- ShipHit
+ShipHit <|-right- ShipSunk
+
+Fleet -up-* Ship
+
+ShipBody << (T,cyan) >>
+ShipBody -up-* ShipCell
+
+
+ShipBody<-left-Ship
+ShipType<-down-Ship
+
+
+enum GameState{
+{static} SETUP
+{static} FIGHT
+{static} OVER
+}
+GameState<-Game
+
+enum Player{
+A
+B
+}
+Player<-left-Game : player
+Player<--Game : turn
+
+@enduml

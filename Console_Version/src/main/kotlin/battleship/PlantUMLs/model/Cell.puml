@@ -1,0 +1,29 @@
+@startuml
+
+hide empty members
+
+abstract class Cell{
+    pos: Position
+}
+Cell <|-down- MissCell
+Cell <|-down- ShipCell
+
+class MissCell{
+pos: Position
+}
+
+class ShipCell{
+pos: Position, val ship : Ship
+}
+ShipCell <|-down- ShipHit
+
+class ShipHit{
+pos : Position, ship : Ship
+}
+ShipHit <|-down- ShipSunk
+
+class ShipSunk{
+pos : Position, ship : Ship
+}
+
+@enduml
