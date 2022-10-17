@@ -1,3 +1,5 @@
+# BattleShip Game
+
 ## Install guide
 
 ### Pre-installation Requirements
