@@ -71,8 +71,8 @@ fun Board.printShipData(row: Int) {
 
 fun Game.printStatus() {
     //Player turn or win status
-    when(this) {
-        is GameSetup -> { }
+    when (this) {
+        is GameSetup -> {}
         is GameFight -> {
             if (playerBoard.lost()) {
                 println(MESSAGE_LOSE)
@@ -88,7 +88,7 @@ fun Game.printStatus() {
     }
 }
 
-fun printHorizontalSeparators(twoSeparators : Boolean) {
+fun printHorizontalSeparators(twoSeparators: Boolean) {
     print(horizontalSeparators) // Print top separator
     if (twoSeparators)
         print(horizontalSeparators)
@@ -134,21 +134,27 @@ fun Game.print() {
     printStatus()
 }
 
-fun printShotResult(result : ShotConsequence, hitType: ShipType?) {
-    when(result) {
+fun printShotResult(result: ShotConsequence, hitType: ShipType?) {
+    when (result) {
         ShotConsequence.HIT -> {
             println("Ship Hit")
         }
+
         ShotConsequence.MISS -> {
             println("Miss Shot")
         }
+
         ShotConsequence.SUNK -> {
             if (hitType != null) {
                 println("${hitType.name} was Sunk")
             }
         }
+
+        else -> {}
     }
+
 }
+
 /**
  * Prints the Column indexes of the board
  */

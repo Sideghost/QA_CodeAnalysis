@@ -10,7 +10,7 @@ import kotlin.test.assertSame
  * Columns are identified by a letter from 'A' to 'J', if the grid has 10 columns.
  * The leftmost column is identified by the letter 'A'.
  */
-class ColumnTest { 
+class ColumnTest {
     @Test
     fun `number of columns`() {
         assertEquals(10, COLUMN_DIM) // const

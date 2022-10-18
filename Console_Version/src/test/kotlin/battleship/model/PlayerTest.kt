@@ -1,7 +1,6 @@
 package battleship.model
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertSame
 
 class PlayerTest {

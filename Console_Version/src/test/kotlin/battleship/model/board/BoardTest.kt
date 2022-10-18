@@ -1,8 +1,7 @@
+package battleship.model.board
 
 import battleship.model.PutConsequence
 import battleship.model.ShotConsequence
-import battleship.model.board.*
-import battleship.model.ship.Ship
 import battleship.model.ship.ShipType
 import kotlin.test.*
 
@@ -13,7 +12,7 @@ class BoardTest {
         val sut = Board()
         assertTrue {
             sut.grid.isEmpty() &&
-            sut.fleet.isEmpty()
+                    sut.fleet.isEmpty()
         }
         assertEquals(0, sut.cellsQuantity())
         assertFalse { sut.fleet.isComplete() }
@@ -23,7 +22,7 @@ class BoardTest {
 
     @Test
     fun `Place a ship`() {
-        val sut = Board();
+        val sut = Board()
         Direction.values().forEach { dir ->
             ShipType.values.forEach { type ->
                 val newBoard = sut.putShip(type, Position[0, 0], dir)
@@ -33,25 +32,28 @@ class BoardTest {
             }
         }
     }
+
     @Test
     fun `Test place ship overlap`() {
-        val type = ShipType.values.first { it.fleetQuantity > 1}
+        val type = ShipType.values.first { it.fleetQuantity > 1 }
         val sut = Board().putShip(type, Position[0, 0], Direction.HORIZONTAL).first
         val res = sut.putShip(type, Position[0, 0], Direction.HORIZONTAL)
         assertSame(PutConsequence.INVALID_POSITION, res.second)
         assertSame(sut, res.first)
     }
+
     @Test
     fun `Test place invalid position`() {
-        val type = ShipType.values.first { it.squares > 1}
+        val type = ShipType.values.first { it.squares > 1 }
         val newBoard = Board()
         val sut = newBoard.putShip(type, Position.values.last(), Direction.HORIZONTAL)
         assertSame(PutConsequence.INVALID_POSITION, sut.second)
         assertSame(newBoard, sut.first)
     }
+
     @Test
     fun `Test place invalid ship type`() {
-        val type = ShipType.values.first { it.fleetQuantity == 1}
+        val type = ShipType.values.first { it.fleetQuantity == 1 }
         val base = Board().putShip(type, Position.values[0], Direction.HORIZONTAL).first
         val sut = base.putShip(type, Position[0, 6], Direction.HORIZONTAL)
         assertSame(sut.second, PutConsequence.INVALID_SHIP)

@@ -6,7 +6,7 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertSame
 
 /**
- * The f1.Row type identifies one of the game's grid lines.
+ * The [Row] type identifies one of the game's grid lines.
  * Rows are identified by a number from 1 to 10 if the grid has 10 rows.
  * The top row is number 1.
  */

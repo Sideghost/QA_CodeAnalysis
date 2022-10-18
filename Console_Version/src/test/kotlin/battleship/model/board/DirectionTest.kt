@@ -1,6 +1,5 @@
-import battleship.model.board.Direction
-import battleship.model.board.toDirection
-import battleship.model.board.toDirectionOrNull
+package battleship.model.board
+
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertSame

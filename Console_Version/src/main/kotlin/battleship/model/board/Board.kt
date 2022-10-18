@@ -117,6 +117,7 @@ fun Board.makeShot(pos: Position): ShotResult {
             // Ship sunk is inferred as an invalid shot because of its inherited from ShipHit
             ShotResult(this, ShotConsequence.INVALID, null)
         }
+
         is ShipCell -> {
             val ship = cell.ship
             val gridAfterShot = grid + (pos to ShipHit(pos, ship))
@@ -130,6 +131,7 @@ fun Board.makeShot(pos: Position): ShotResult {
                 ShotResult(copy(grid = gridAfterShot), ShotConsequence.HIT, ship.type)
             }
         }
+
         null -> {
             // Add cell to the grid with MissCell
             return ShotResult(copy(grid = grid + (pos to MissCell(pos))), ShotConsequence.MISS, null)

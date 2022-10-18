@@ -4,7 +4,7 @@ import org.junit.jupiter.api.assertThrows
 import kotlin.test.*
 
 /**
- * The f1.Position type identifies a position in the battleship game grid (Column and f1.Row)
+ * The [Position] type identifies a position in the battleship game grid (Column and f1.Row)
  * Positions are identified by a letter and a number.
  * The upper left corner is "A1" and the lower right corner on a 10x10 grid is "J10".
  */

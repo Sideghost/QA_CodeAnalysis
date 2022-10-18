@@ -1,12 +1,13 @@
 package battleship.ui
 
 import battleship.model.*
-import battleship.model.board.*
+import battleship.model.board.isComplete
+import battleship.model.board.toDirection
+import battleship.model.board.toPosition
 import battleship.model.ship.toShipType
 import battleship.model.ship.toShipTypeOrNull
 import battleship.storage.Storage
 import kotlinx.coroutines.runBlocking
-import org.litote.kmongo.MongoOperator
 
 private const val ERROR_INVALID_ARGUMENTS = "Invalid Arguments"
 

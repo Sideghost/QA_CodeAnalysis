@@ -8,7 +8,7 @@ import battleship.model.ship.toShipTypeOrNull
 import kotlin.test.*
 
 /**
- * The f1.ShipType type identifies types of ships allowed in game.
+ * The [ShipType] type identifies types of ships allowed in game.
  */
 class ShipTypeTest {
     @Test
