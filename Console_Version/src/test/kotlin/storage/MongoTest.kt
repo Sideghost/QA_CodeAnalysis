@@ -15,12 +15,13 @@ class MongoTest {
 
     private val testNumber: Int by lazy { getLastTestNr() }
 
-    private val testName = "test_nr"
+    private val testName: String= "test_nr"
 
-    private val docName = "test"
+    private val docName: String = "test"
 
-    private val id = "_id"
+    private val id: String = "_id"
 
+    private val numberOfConnections = 10
 
     /**
      * Adds a blank document with the test number and an arbitrary field and updates the test counter.
@@ -71,5 +72,39 @@ class MongoTest {
             val newDoc = collection.getDocument(docName + id)
             newDoc?.field ?: throw IllegalStateException("BA BUM")
         }
+    }
+
+    private fun `get time from insert`(): Long {
+        val oldTime = System.currentTimeMillis()
+        `insert Document`()
+        val newTime = System.currentTimeMillis()
+        return newTime-oldTime
+    }
+
+    private fun `get time from delete`(): Long {
+        val oldTime = System.currentTimeMillis()
+        `delete Document`()
+        val newTime = System.currentTimeMillis()
+        return newTime-oldTime
+    }
+
+    @Test
+    fun `connection time`() {
+        var acc = 0L
+        for (i in 0.. numberOfConnections) {
+            acc += `get time from insert`()
+        }
+        val avg = acc / numberOfConnections
+        println("avg connection time of $numberOfConnections connections \n$avg")
+    }
+
+    @Test
+    fun `delete connection time`() {
+        var acc = 0L
+        for (i in 0.. numberOfConnections) {
+            acc += `get time from delete`()
+        }
+        val avg = acc / numberOfConnections
+        println("avg connection time of $numberOfConnections connections \n$avg")
     }
 }
