@@ -15,7 +15,7 @@ class MongoTest {
 
     private val testNumber: Int by lazy { getLastTestNr() }
 
-    private val testName: String= "test_nr"
+    private val testName: String = "test_nr"
 
     private val docName: String = "test"
 
@@ -78,20 +78,20 @@ class MongoTest {
         val oldTime = System.currentTimeMillis()
         `insert Document`()
         val newTime = System.currentTimeMillis()
-        return newTime-oldTime
+        return newTime - oldTime
     }
 
     private fun `get time from delete`(): Long {
         val oldTime = System.currentTimeMillis()
         `delete Document`()
         val newTime = System.currentTimeMillis()
-        return newTime-oldTime
+        return newTime - oldTime
     }
 
     @Test
     fun `connection time`() {
         var acc = 0L
-        for (i in 0.. numberOfConnections) {
+        for (i in 0..numberOfConnections) {
             acc += `get time from insert`()
         }
         val avg = acc / numberOfConnections
@@ -101,7 +101,7 @@ class MongoTest {
     @Test
     fun `delete connection time`() {
         var acc = 0L
-        for (i in 0.. numberOfConnections) {
+        for (i in 0..numberOfConnections) {
             acc += `get time from delete`()
         }
         val avg = acc / numberOfConnections

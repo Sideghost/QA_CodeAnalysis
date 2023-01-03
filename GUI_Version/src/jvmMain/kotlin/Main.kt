@@ -21,7 +21,6 @@ fun main() {
                     onCloseRequest = ::exitApplication,
                     state = WindowState(
                         position = WindowPosition(Alignment.Center),
-
                         width = (BOARD_WIDTH * 2).dp,
                         height = Dp.Unspecified
                     )

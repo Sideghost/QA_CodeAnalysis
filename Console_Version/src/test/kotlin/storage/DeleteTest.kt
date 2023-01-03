@@ -8,7 +8,7 @@ import kotlin.test.assertNotNull
 class DeleteTest {
 
     private val collectionName = "tests"
-    private val testName: String= "test_nr"
+    private val testName: String = "test_nr"
     private val docName: String = "test"
     private val id: String = "_id"
     private val numberOfConnections = 10
@@ -38,7 +38,7 @@ class DeleteTest {
     @Test
     fun `delete connection time`() {
         val nrOfTests = getLastTestNr() + 1
-        if(nrOfTests < numberOfConnections) {
+        if (nrOfTests < numberOfConnections) {
             val counter = numberOfConnections - nrOfTests
             insertDocuments(nrOfTests, counter)
         }
@@ -58,7 +58,7 @@ class DeleteTest {
         val oldTime = System.currentTimeMillis()
         `delete Document`()
         val newTime = System.currentTimeMillis()
-        return newTime-oldTime
+        return newTime - oldTime
     }
 
     /**
@@ -79,7 +79,7 @@ class DeleteTest {
     /**
      * Inserts [counter] number of documents.
      */
-    private fun insertDocuments(start :Int, counter :Int){
+    private fun insertDocuments(start: Int, counter: Int) {
         var acc = start
         MongoDriver().use {
             val collection = it.getCollection<MongoTest.Doc>(collectionName)
@@ -88,7 +88,7 @@ class DeleteTest {
                 collection.insertDocument(MongoTest.Doc(name, 10))
                 acc++
             }
-            val sut = start+counter
+            val sut = start + counter
             collection.replaceDocument(MongoTest.Doc(docName + id, sut))
         }
     }

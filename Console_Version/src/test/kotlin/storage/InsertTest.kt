@@ -1,6 +1,9 @@
 package storage
 
-import mongoDB.*
+import mongoDB.MongoDriver
+import mongoDB.getDocument
+import mongoDB.insertDocument
+import mongoDB.replaceDocument
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -9,15 +12,19 @@ import kotlin.test.assertNotNull
 class InsertTest {
 
     private val collectionName = "tests"
-    private val testName: String= "test_nr"
+
+    private val testName: String = "test_nr"
+
     private val docName: String = "test"
+
     private val id: String = "_id"
-    private val numberOfConnections = 10
+
+    private val numberOfConnections = 100
 
     @Test
     fun `insert connection time`() {
         var acc = 0L
-        for (i in 0.. numberOfConnections) {
+        for (i in 0..numberOfConnections) {
             acc += `get time from insert`()
         }
         val avg = acc / numberOfConnections
@@ -26,12 +33,11 @@ class InsertTest {
     }
 
     private fun `get time from insert`(): Long {
-            val oldTime = System.currentTimeMillis()
-            `insert Document`()
-            val newTime = System.currentTimeMillis()
-            return newTime-oldTime
-        }
-
+        val oldTime = System.currentTimeMillis()
+        `insert Document`()
+        val newTime = System.currentTimeMillis()
+        return newTime - oldTime
+    }
 
 
     /*** Adds a blank document with the test number and an arbitrary field and updates the test counter.***/
