@@ -32,23 +32,29 @@ class ModelView(private val storage: Storage, private val scope: CoroutineScope)
 
     var openDialogName by mutableStateOf(false)
         private set
+
     // for pop-up window
     var warning by mutableStateOf<String?>(null)
         private set
+
     // for status bar message
     var message by mutableStateOf<String?>(null)
         private set
+
     // coroutine to show message on status bar
     private var messageJob by mutableStateOf<Job?>(null)
+
     // auto refresh coroutine
     var jobAutoRefresh by mutableStateOf<Job?>(null)
         private set
 
     var autoRefreshEnabled by mutableStateOf(true)
-       private set
+        private set
+
     // selected type to place ships with
     var selectedType by mutableStateOf<ShipType?>(ShipType.values.first())
         private set
+
     // selected direction to place ships with
     var selectedDirection by mutableStateOf(Direction.HORIZONTAL)
         private set
@@ -101,7 +107,7 @@ class ModelView(private val storage: Storage, private val scope: CoroutineScope)
             openDialogName = true
         } else {
 
-            if(!name.all { it.isWhitespace() || it.isLetterOrDigit()}) {
+            if (!name.all { it.isWhitespace() || it.isLetterOrDigit() }) {
                 warning = "Game name should only have alphanumeric characters and whitespaces"
                 return
             }
@@ -119,12 +125,11 @@ class ModelView(private val storage: Storage, private val scope: CoroutineScope)
      *
      * @param auto boolean if auto refresh is on or not.
      */
-    fun setAutoRefresh(auto : Boolean) {
+    fun setAutoRefresh(auto: Boolean) {
         autoRefreshEnabled = auto
         if (autoRefreshEnabled) {
             waitForOther()
-        }
-        else {
+        } else {
             cancelAutoRefresh()
         }
     }
@@ -133,7 +138,7 @@ class ModelView(private val storage: Storage, private val scope: CoroutineScope)
      * Function that has the logic condition if you should auto refresh or not.
      * @param g Game to auto refresh.
      */
-    private fun shouldAutoRefresh(g : GameFight) =
+    private fun shouldAutoRefresh(g: GameFight) =
         (g.isNotYourTurn || (g.isYourTurn && g.enemyBoard.fleet.isEmpty())) && g.winner == null
 
     /**
@@ -243,7 +248,7 @@ class ModelView(private val storage: Storage, private val scope: CoroutineScope)
      */
     fun makeShot(pos: Position) {
         with(getGame<GameFight>()) {
-            if(winner != null) return
+            if (winner != null) return
 
             if (this.enemyBoard.fleet.isEmpty()) {
                 sendMessage(STATUS_WARN_INVALID_SHOT_WAIT_FOR_OTHER)
@@ -253,8 +258,7 @@ class ModelView(private val storage: Storage, private val scope: CoroutineScope)
             if (shotResult.second !== ShotConsequence.INVALID && shotResult.second !== ShotConsequence.NOT_YOUR_TURN) {
                 game = shotResult.first
                 waitForOther()
-            }
-            else {
+            } else {
                 when (shotResult.second) {
                     ShotConsequence.NOT_YOUR_TURN -> sendMessage(STATUS_WARN_INVALID_SHOT_TURN)
                     ShotConsequence.INVALID -> sendMessage(STATUS_WARN_INVALID_SHOT)
@@ -271,8 +275,8 @@ class ModelView(private val storage: Storage, private val scope: CoroutineScope)
      * @param type the [ShipType] to be set.
      */
     fun setShipType(type: ShipType) {
-        selectedType = type.takeIf {
-            shipType -> game.playerBoard.fleet.count { shipType === it.type } < type.fleetQuantity
+        selectedType = type.takeIf { shipType ->
+            game.playerBoard.fleet.count { shipType === it.type } < type.fleetQuantity
         }
     }
 

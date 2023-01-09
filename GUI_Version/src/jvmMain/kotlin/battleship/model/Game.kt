@@ -159,11 +159,11 @@ val GameFight.isNotYourTurn get() = !isYourTurn
 val Game.hasStarted get() = this !is GameSetup
 val Game.hasNotStarted get() = !hasStarted
 
-val GameFight.winner : Player?
+val GameFight.winner: Player?
     get() {
-        return if(playerBoard.lost())
+        return if (playerBoard.lost())
             player.other()
-        else if(enemyBoard.fleet.isNotEmpty() && enemyBoard.lost())
+        else if (enemyBoard.fleet.isNotEmpty() && enemyBoard.lost())
             player
         else
             null

@@ -47,15 +47,15 @@ fun FrameWindowScope.BattleshipApp(storage: Storage, onExit: () -> Unit) {
                 // Left Side //
                 ///////////////
                 val onClickCell: ((Position) -> Unit) =
-                        { pos ->
-                            if (model.game.hasNotStarted) {
-                                val cell = model.game.playerBoard.grid[pos]
-                                if (cell is ShipCell)
-                                    model.removeShip(pos)
-                                else
-                                    model.putShip(pos)
-                            }
+                    { pos ->
+                        if (model.game.hasNotStarted) {
+                            val cell = model.game.playerBoard.grid[pos]
+                            if (cell is ShipCell)
+                                model.removeShip(pos)
+                            else
+                                model.putShip(pos)
                         }
+                    }
                 BoardWithGuidesView(model.game.playerBoard, false, model.game.hasNotStarted, onClickCell)
 
                 ////////////////

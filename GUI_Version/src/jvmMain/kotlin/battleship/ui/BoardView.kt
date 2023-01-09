@@ -24,7 +24,7 @@ const val BOARD_HEIGHT = (BOARD_CELL_SIZE + BOARD_LINE_SIZE) * (ROW_DIM + 1)
  * @param onClickCell function that knows what to do when a cell is clicked in a certain [Position]
  */
 @Composable
-fun BoardView(board: Board, hidden: Boolean, canClick : Boolean, onClickCell: (Position) -> Unit) {
+fun BoardView(board: Board, hidden: Boolean, canClick: Boolean, onClickCell: (Position) -> Unit) {
     Column {
         repeat(ROW_DIM) { line ->
             if (line != 0) Spacer(Modifier.height(BOARD_LINE_SIZE.dp)) //Add spacer in every row except the first
@@ -90,7 +90,7 @@ fun NumberAxisView() {
  * @param onClickCell function that knows what to do when a cell is clicked in a certain [Position]
  */
 @Composable
-fun BoardWithGuidesView(board: Board, hidden: Boolean, canClick : Boolean, onClickCell: (Position) -> Unit) {
+fun BoardWithGuidesView(board: Board, hidden: Boolean, canClick: Boolean, onClickCell: (Position) -> Unit) {
     Column(Modifier.background(Color.White).width(BOARD_WIDTH.dp).height(BOARD_HEIGHT.dp)) {
         //ROW with column identifiers
         Row {

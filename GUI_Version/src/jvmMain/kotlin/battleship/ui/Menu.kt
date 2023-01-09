@@ -23,7 +23,11 @@ fun FrameWindowScope.GameMenu(model: ModelView, onExit: () -> Unit) {
                 enabled = model.game.hasNotStarted && model.game.playerBoard.fleet.isComplete(),
                 onClick = { model.start() })
             Item("Refresh", enabled = model.game.hasStarted && !model.autoRefreshEnabled, onClick = { model.refresh() })
-            CheckboxItem("Automatic refresh", checked = model.autoRefreshEnabled, enabled = model.game.hasStarted, onCheckedChange = { on -> model.setAutoRefresh(on) })
+            CheckboxItem(
+                "Automatic refresh",
+                checked = model.autoRefreshEnabled,
+                enabled = model.game.hasStarted,
+                onCheckedChange = { on -> model.setAutoRefresh(on) })
             Item("Exit", onClick = onExit)
         }
         Menu("Fleet") {

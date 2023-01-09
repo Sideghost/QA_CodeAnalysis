@@ -55,7 +55,7 @@ fun calculateColor(cell: Cell?, hidden: Boolean) =
  * @param onClick what do when the [Cell] is clicked
  */
 @Composable
-fun CellView(cell: Cell?, hidden: Boolean, canClick : Boolean, onClick: () -> Unit) {
+fun CellView(cell: Cell?, hidden: Boolean, canClick: Boolean, onClick: () -> Unit) {
     val modifier = Modifier
         .size(BOARD_CELL_SIZE.dp)
         .background(Color.White)
@@ -72,11 +72,13 @@ fun CellView(cell: Cell?, hidden: Boolean, canClick : Boolean, onClick: () -> Un
                         .alpha(BOARD_MISS_ALPHA)
                 )
             }
+
             is ShipHit -> Image(
                 painterResource(CELL_HIT_IMAGE),
                 CELL_HIT_DESCRIPTION,
                 Modifier.size(BOARD_CELL_SIZE.dp)
             )
+
             else -> {}
         }
     }

@@ -46,6 +46,7 @@ fun StatusView(model: ModelView, message: String? = null) = Row(
             is GameSetup -> {
                 Text(STATUS_PROMPT_SETUP, fontWeight = FontWeight.Bold)
             }
+
             is GameFight -> {
                 Row {
                     Text("Game:", fontWeight = FontWeight.Bold)
@@ -56,9 +57,11 @@ fun StatusView(model: ModelView, message: String? = null) = Row(
                             player -> {
                                 STATUS_WARN_VICTORY
                             }
+
                             player.other() -> {
                                 STATUS_WARN_DEFEAT
                             }
+
                             else -> ""
                         }
                         Spacer(Modifier.size(STATUS_DISTANCE_BETWEEN_TEXTS.dp))

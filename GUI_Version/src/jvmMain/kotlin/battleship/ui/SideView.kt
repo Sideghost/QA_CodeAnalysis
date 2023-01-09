@@ -37,7 +37,12 @@ fun ShipSelectorView(fleet: Fleet, onClick: (ShipType) -> Unit, currShip: ShipTy
                     onClick(type)
                 }
                 val isSelected = type === currShip
-                RadioButton(selected = isSelected, onClick = func, enabled = fleetQuantity < type.fleetQuantity, colors = RadioButtonDefaults.colors(Color.Cyan))
+                RadioButton(
+                    selected = isSelected,
+                    onClick = func,
+                    enabled = fleetQuantity < type.fleetQuantity,
+                    colors = RadioButtonDefaults.colors(Color.Cyan)
+                )
                 Text("$fleetQuantity of ${type.fleetQuantity}")
                 repeat(type.squares) {
                     Spacer(Modifier.size(1.dp))
@@ -81,7 +86,13 @@ fun DirectionSelectorView(onClick: (Direction) -> Unit, currDir: Direction) {
  * @param currDir the Dir to show as selected in side view.
  */
 @Composable
-fun SideView(fleet: Fleet, onClickType: (ShipType) -> Unit, currType: ShipType?, onClickDirection: (Direction) -> Unit, currDir: Direction) {
+fun SideView(
+    fleet: Fleet,
+    onClickType: (ShipType) -> Unit,
+    currType: ShipType?,
+    onClickDirection: (Direction) -> Unit,
+    currDir: Direction
+) {
     Column(horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.SpaceBetween) {
         Spacer(Modifier.size(BOARD_CELL_SIZE.dp))
         ShipSelectorView(fleet, onClickType, currType)
